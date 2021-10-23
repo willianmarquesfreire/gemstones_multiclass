@@ -1,0 +1,2 @@
+# gemstones_multiclass_classification_transferlearning
+Trabalho para matéria de reconhecimento de padrões
