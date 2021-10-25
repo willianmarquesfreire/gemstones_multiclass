@@ -1,0 +1,173 @@
+# Listas
+config1 <- c(1.0838099718093872, 0.7190082669258118)
+config2 <- c(2.1048, 0.4493)
+config3 <- c(1.05930, 0.83566)
+config4 <- c(2.1455589731534324, 0.6555944085121155)
+config5 <- c(2.0571, 0.4792)
+config6 <- c(2.2950, 0.5704)
+config7 <- c(1.1819, 0.7356)
+#boxplot
+
+boxplot(config1, config2, config3, config4, config5, config6, config7, main="Results for AGM1", names=c("InceptionV3", "DenseNet201", "EfficientNetB4", "CNN1", "CNN2", "CNN3", "alexnet"), ylab="hypervolume")
+
+# Kruskal-Wallis
+
+y <- c(config1, config2, config3, config4, config5, config6, config7)
+aux <- c( rep(1,length(config1)), rep(2,length(config2)), rep(3,length(config3)), rep(4,length(config4)), rep(5,length(config5)), rep(6,length(config6)), rep(7,length(config7)))
+group <- as.factor(aux)
+kruskal.test(y ~group)
+
+
+	Kruskal-Wallis rank sum test
+
+data:  y by group
+Kruskal-Wallis chi-squared = 0.51429, df = 6, p-value = 0.9977
+
+# Nemenyi, vamos deixar pronto para sabermos onde está a diferença, quem difere de quem <https://operdata.com.br/blog/teste-de-kruskal-wallis-e-o-teste-de-nemenyi/>
+
+install.packages('PMCMR')
+library('PMCMR')
+methods <- factor(aux, labels=c("config1", "config2", "config3", "config4", "config5", "config6"))
+posthoc.kruskal.nemenyi.test(x=y, g=methods, method="Tukey")
+
+#Resultados do Nemenyi
+
+		Pairwise comparisons using Tukey and Kramer (Nemenyi) test	
+                   with Tukey-Dist approximation for independent samples 
+
+data:  y and methods 
+
+        config1 config2 config3 config4 config5
+config2 0.7272  -       -       -       -      
+config3 0.4440  0.0155  -       -       -      
+config4 3.3e-05 1.3e-08 0.0435  -       -      
+config5 0.0148  4.9e-05 0.7181  0.6745  -      
+config6 1.1e-07 1.0e-11 0.0011  0.9007  0.1141 
+
+P value adjustment method: none 
+ 
+
+# Vargha Delaney, como se compara em duplas, precisa fazer todas as combinações
+
+install.packages('effsize')
+library('effsize')
+
+#config1 vs config2
+
+VD.A(config1,config2)
+
+Vargha and Delaney A
+
+A estimate: 0.3333333 (medium)
+
+#config1 vs config3
+
+VD.A(config1,config3)
+
+Vargha and Delaney A
+
+A estimate: 0.7244444 (medium)
+
+#config1 vs config4
+
+VD.A(config1,config4)
+
+Vargha and Delaney A
+
+A estimate: 0.8388889 (large)
+
+#config1 vs config5
+
+VD.A(config1,config5)
+
+Vargha and Delaney A
+
+A estimate: 0.7988889 (large)
+
+#config1 vs config6
+
+VD.A(config1,config6)
+
+Vargha and Delaney A
+
+A estimate: 0.8655556 (large)
+
+#config2 vs config3
+
+VD.A(config2,config3)
+
+Vargha and Delaney A
+
+A estimate: 0.86 (large)
+
+#config2 vs config4
+
+VD.A(config2,config4)
+
+Vargha and Delaney A
+
+A estimate: 0.8844444 (large)
+
+#config2 vs config5
+
+VD.A(config2,config5)
+
+Vargha and Delaney A
+
+A estimate: 0.8811111 (large)
+
+#config2 vs config6
+
+VD.A(config2,config6)
+
+Vargha and Delaney A
+
+A estimate: 0.8966667 (large)
+
+#config3 vs config4
+
+VD.A(config3,config4)
+
+Vargha and Delaney A
+
+A estimate: 0.8055556 (large)
+
+#config3 vs config5
+
+VD.A(config3,config5)
+
+Vargha and Delaney A
+
+A estimate: 0.6577778 (small)
+
+#config3 vs config6
+
+VD.A(config3,config6)
+
+Vargha and Delaney A
+
+A estimate: 0.86 (large)
+
+#config4 vs config5
+
+VD.A(config4,config5)
+
+Vargha and Delaney A
+
+A estimate: 0.3244444 (medium)
+
+#config4 vs config6
+
+VD.A(config4,config6)
+
+Vargha and Delaney A
+
+A estimate: 0.6433333 (small)
+
+#config5 vs config6
+
+VD.A(config5,config6)
+
+Vargha and Delaney A
+
+A estimate: 0.7666667 (large)
