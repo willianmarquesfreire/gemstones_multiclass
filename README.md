@@ -12,6 +12,4 @@ CNN 2 https://www.kaggle.com/himalayaashish/cnn-on-87-classes-of-gemstones-for-c
 
 CNN 3 https://www.kaggle.com/lsind18/gemstones-multiclass-classification-cnn
 
-2nets https://www.kaggle.com/annashtangey/gemstones-classification-pytorch-2nets
-
 alexnet https://www.kaggle.com/micheledifazio/gemstones-alexnet-pytorch
